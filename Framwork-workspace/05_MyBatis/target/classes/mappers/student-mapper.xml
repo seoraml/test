@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- xml 파일의 유효성 체크를 위한 부분 -->
+<mapper namespace="student">
+	<!-- 
+		mapper 는 구문을 만들수 있는 영역
+		일반적으로 테이블 1개당 1개씩의 mapper
+		namespace 속성 : 해당 mapper 에 있는 쿼리문을 불러올때 쓸 수 있는 일종의 별칭
+	-->
+	<!--  기존 방식 : entry 태그에 key 속성으로 쿼리문을 구분함 -->
+	<!-- 
+		MyBits 방식 : insert, select, update, delete 태그에
+					id 속성으로 쿼리문을 구분함
+					
+		- id : 쿼리문을 불러오기 위한 키값
+		- parameterType : mybatis-config.xml 에서 typeAlias에서 지정했던 vo 클래스의 명칭
+							쿼리문을 실행하기 위해 필요한 값을 해당 타입으로 넘겨받아서 그 객체로부터 불러오겠다.
+							즉, 자바 메소드에서의 매개변수와 비슷한 의미
+							채울 필요가 없으면 생략 가능
+	 -->
+	<insert id="registStudent" parameterType="com.kh.spring05.vo.Student">
+		<!-- 
+			기존 방식 : 위치홀더를 사용했음
+			INSERT INTO STUDENT VALUES(?, ?, ?, DEFAULT)
+		 -->
+		 <!-- 
+		 	MyBatis 방식 : 해당 parameterType 으로 받은 객체 타입의 필드값을 뽑아오고자 할 때
+		 					#{필드명}으로 작성한다. 
+		  -->
+		INSERT INTO STUDENT(NAME, AGE, SCORE, ENROLL_DATE)
+		VALUE(#{name}, #{age}, #{score}, DEFAULT)
+	</insert>
+	
+	<select id="selectStudentList" resultType="student">
+		<!-- STUDENT 테이블로부터 조회 : 이름 순으로 오름차순 -->
+		SELECT *
+		FROM STUDENT
+		ORDER BY NAME
+	</select>
+</mapper>

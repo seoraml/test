@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- xml 파일의 유효성 체크를 위한 부분 -->
+<configuration>
+	
+	<!-- MyBatis 를 운용하기 위한 설정이 있다면 이곳에 작성하는것이 원칙 -->
+	
+	<!-- properties : 이 문서 또는 외부에서 사용할 환경설정과 관련된 변수를 지정 -->
+	<properties></properties>
+	
+	<!-- 
+		settings : MyBatis 실행 중 반영되어야할 규칙을 지정
+				      필요할 때마다 개발자 문서를 찾자 
+	-->
+	<settings>
+		<setting name="cacheEnabled" value="true"></setting>
+		<!-- 캐시메모리를 사용할지 말지 결정하는 속성 (무조건 쓴다고 좋은것은 아님) -->
+		
+		<setting name="lazyLoadingEnabled" value="true"></setting>
+		<!-- 로딩을 지연시킬지 말지 -->
+		
+		<setting name="autoMappingBehavior" value="FULL"></setting>
+		<!-- 
+			컬럼을 필드/프로퍼티에 자동으로 맵핑할지 말지
+			(개발자 입장에서는 좋음 => 다 맵핑해주니까)
+			(단, 성능이 좀 떨어질 수는 있다.)
+		-->
+	</settings>
+	
+	<!-- typeAliases : VO 클래스에 별칭을 지정하겠다. -->
+	<typeAliases>
+		<typeAlias alias="student" type="com.kh.spring05.model.vo.Student"></typeAlias>
+		<typeAlias alias="menu" type="com.kh.spring05.model.vo.Menu"></typeAlias>
+	</typeAliases>
+	
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+

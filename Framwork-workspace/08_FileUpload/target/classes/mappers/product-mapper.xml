@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- xml 파일의 유효성 체크를 위한 부분 -->
+<mapper namespace="product">
+
+	<!--  상품 등록용 쿼리문 -->
+	<insert id="insertProduct" parameterType="product">
+		INSERT INTO PRODUCT(
+							PRODUCT_NO,
+							PRODUCT_NAME,
+							PRICE,
+							TYPE)
+		VALUES(
+				SEQ_PNO.NEXTVAL,
+				#{productName},
+				#{price},
+				#{type})
+	</insert>
+	
+	<!-- 상품 목혹 전체 조회 쿼리문 -->
+	<select id="productList" resultType="product">
+		SELECT *
+		FROM PRODUCT
+		ORDER BY PRODUCT_NO ASC
+	</select>
+	
+	<!-- 정렬 기능이 추가된 삼품 목록 쿼리문 -->
+	<select id="productOrderList" resultType="product" parameterType="map">
+		SELECT *
+		FROM PRODUCT
+		ORDER BY ${col} ${order}
+	</select>
+	
+	<!-- 상품 상세조회용 쿼리문 -->
+	<select id="detailProduct" parameterType="int" resultType="product">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{pno}
+	</select>
+	
+	<!-- 상품 삭제용 쿼리문 -->
+	<delete id="deleteProduct" parameterType="int">
+		DELETE
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{pno}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+

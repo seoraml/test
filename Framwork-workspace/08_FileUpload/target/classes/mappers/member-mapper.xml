@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- xml 파일의 유효성 체크를 위한 부분 -->
+<mapper namespace="member">
+	
+	<!-- 회원가입 : MEMBER 테이블에 INSERT 하는 구조 -->
+	<insert id="join" parameterType="member">
+		INSERT INTO MEMBER(
+						   MEMBER_ID, 
+						   MEMBER_PWD,
+						   MEMBER_NICK,
+						   POST,
+						   BASE_ADDR,
+						   EXTRA_ADDR,
+						   BIRTH,
+						   PHONE,
+						   MEMBER_INTRO,
+						   MEMBER_AUTH,
+						   ENROLL_DATE,
+						   LAST_LOGIN
+						   )
+		VALUES(
+			   #{memberId}, 
+			   #{memberPwd},
+			   #{memberNick},
+			   #{post},
+			   #{baseAddr},
+			   #{extraAddr},
+			   #{birth},
+			   #{phone},
+			   #{memberIntro},
+			   '일반',
+			   DEFAULT,
+			   NULL)
+	</insert>
+	
+	<!-- 아이디 중복 체크 : 아이디를 이용한 단일 조회 (중복X) -->
+	<select id="idCheck" resultType="member" parameterType="string">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 회원 목록 조회 -->
+	<select id="selectList" resultType="member">
+		SELECT *
+		FROM MEMBER
+		ORDER BY MEMBER_ID ASC
+	</select>
+	
+	<!-- 로그인을 위한 SQL 구문 -->
+	<select id="loginMember" resultType="member" parameterType="member">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		  AND MEMBER_PWD = #{memberPwd}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
